@@ -1,0 +1,77 @@
+USE [HOTELERA]
+GO
+/****** Object:  Table [dbo].[CLIENTE]    Script Date: 13/05/2015 20:12:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[CLIENTE](
+	[DNI] [char](8) NOT NULL,
+	[Nombre] [varchar](50) NULL,
+	[Apellido] [varchar](50) NULL,
+	[Fecha_Ingreso] [datetime] NULL,
+	[Fecha_Salida] [datetime] NULL,
+	[Hora_Ingreso] [time](7) NULL,
+	[Hora_salida] [time](7) NULL,
+	[Num_Habitacion] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[DNI] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[HABITACION]    Script Date: 13/05/2015 20:12:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[HABITACION](
+	[Num_Habitacion] [int] NOT NULL,
+	[Estado] [varchar](20) NULL,
+	[Descripción] [varchar](20) NULL,
+	[Num_Camas] [int] NULL,
+	[IdHotel] [char](5) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Num_Habitacion] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[HOTEL]    Script Date: 13/05/2015 20:12:26 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[HOTEL](
+	[IdHotel] [char](5) NOT NULL,
+	[Nombre] [varchar](20) NULL,
+	[Direccion] [varchar](20) NULL,
+	[Telefono] [varchar](10) NULL,
+	[Num_Habitaciones] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdHotel] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[CLIENTE]  WITH CHECK ADD FOREIGN KEY([Num_Habitacion])
+REFERENCES [dbo].[HABITACION] ([Num_Habitacion])
+GO
+ALTER TABLE [dbo].[HABITACION]  WITH CHECK ADD FOREIGN KEY([IdHotel])
+REFERENCES [dbo].[HOTEL] ([IdHotel])
+GO
