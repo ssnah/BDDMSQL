@@ -1,0 +1,40 @@
+CREATE DATABASE HOTELERA;
+USE HOTELERA
+
+CREATE TABLE HOTEL (
+IdHotel char(5) not null, 
+Nombre varchar (20),
+ Direccion varchar (20), 
+ Telefono varchar (10),
+ Num_Habitaciones int)
+
+ CREATE TABLE HABITACION (
+ Num_Habitacion int not null,
+  Estado varchar (20),
+ Descripción varchar (20),
+  Num_Camas int)
+
+  CREATE TABLE CLIENTE (
+  DNI char(8) not null,
+   Nombre varchar (50),
+ Apellido varchar (50),
+  Fecha_Ingreso datetime,
+ Fecha_Salida datetime,
+  Hora_Ingreso time,
+   Hora_salida time)
+
+
+   SELECT * FROM HOTEL
+SELECT * FROM HABITACION
+SELECT * FROM CLIENTE
+
+ALTER TABLE HABITACION ADD IdHotel char(5) not null
+
+ALTER TABLE CLIENTE ADD Num_Habitacion int not null
+
+
+ALTER TABLE HOTEL ADD PRIMARY KEY (IdHotel)
+ALTER TABLE HABITACION ADD PRIMARY KEY (Num_Habitacion)
+ALTER TABLE CLIENTE ADD PRIMARY KEY (DNI)
+ALTER TABLE HABITACION ADD FOREIGN KEY (IdHotel) references HOTEL
+ALTER TABLE CLIENTE ADD FOREIGN KEY (Num_Habitacion) references HABITACION
